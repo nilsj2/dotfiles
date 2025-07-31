@@ -1,0 +1,6 @@
+#!/bin/sh
+
+sudo rm /usr/share/X11/xkb/symbols/se
+sudo ln -s $HOME/.config/custom-keyboard-layout/se /usr/share/X11/xkb/symbols/
+sudo rm /usr/share/X11/xkb/rules/evdev.xml
+sudo ln -s $HOME/.config/custom-keyboard-layout/evdev.xml /usr/share/X11/xkb/rules/
