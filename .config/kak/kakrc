@@ -14,7 +14,7 @@ set-option global scrolloff 3,3
 set-option global ui_options ncurses_status_on_top=true
 
 # Display line numbers
-add-highlighter global/ number-lines -hlcursor
+add-highlighter global/ number-lines -hlcursor -relative
 
 # Highlight trailing whitespace
 add-highlighter global/ regex \h+$ 0:Error
