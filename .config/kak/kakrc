@@ -35,6 +35,14 @@ map global user T ": evaluate-commands -draft table-toggle<ret>" -docstring "tog
 
 # kak-lsp
 eval %sh{kak-lsp --kakoune --session "$kak_session"}  # Not needed if you load it with plug.kak.
+
+hook -group lsp-filetype-python global BufSetOption filetype=python %{
+    set-option buffer lsp_servers %{
+        [basedpyright-langserver]
+        root_globs = ["requirements.txt", "setup.py", "pyproject.toml", "pyrightconfig.json", ".git", ".hg"]
+        args = ["--stdio"]
+    }
+}
 lsp-enable
 
 enable-auto-pairs
@@ -58,20 +66,6 @@ map global user S ':change-surround<ret>' -docstring "Change the nearest surroun
 
 map global user w '%|fmt -w 80<ret>' -docstring "format the documetn"
 
-hook -group lsp-filetype-typst global BufSetOption filetype=typst %{
-    set-option buffer lsp_servers %{
-        [tinymist]
-        root_globs = [".git", ".hg"]
-        args = ["lsp"]
-        settings_section = "_"
-        [tinymist.settings._]
-        # See https://myriad-dreamin.github.io/tinymist/configurations.html
-        exportPdf = "onDocumentHasTitle"
-        formatterMode = "typstyle"
-        previewFeature = "disable"
-    }
-    set-option -add buffer lsp_servers "formatterPrintWidth = %opt{autowrap_column}"
-}
-
-
 map global user '/' /(?i) -docstring "case incensitive search"
+
+
