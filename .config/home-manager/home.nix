@@ -42,6 +42,11 @@
 	pkgs.python3
 	pkgs.htop
 	pkgs.btop
+	pkgs.uv
+	pkgs.jq
+	pkgs.elixir
+	pkgs.erlang
+	pkgs.elixir-ls
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
