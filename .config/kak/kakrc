@@ -7,6 +7,10 @@ set-option global tabstop 4
 # Indent with 4 spaces
 set-option global indentwidth 4
 
+hook global BufSetOption filetype=elixir %{
+    set-option buffer indentwidth 2
+}
+
 # Always keep one line and three columns displayed around the cursor
 set-option global scrolloff 3,3
 
@@ -71,7 +75,26 @@ map global user w '%|fmt -w 80<ret>' -docstring "format the documetn"
 
 map global user '/' /(?i) -docstring "case incensitive search"
 
-hook global NormalIdle .* %{
-    git show-diff
+
+# enable flag-lines hl for git diff
+hook global WinCreate .* %{
+    add-highlighter window/git-diff flag-lines Default git_diff_flags
+}
+# trigger update diff if inside git dir
+hook global BufOpenFile .* %{
+    evaluate-commands -draft %sh{
+        cd $(dirname "$kak_buffile")
+        if [ $(git rev-parse --git-dir 2>/dev/null) ]; then
+            for hook in WinCreate BufReload BufWritePost; do
+                printf "hook buffer -group git-update-diff %s .* 'git update-diff'\n" "$hook"
+            done
+        fi
+    }
 }
 
+hook global WinSetOption .* expandtab
+
+map global user v ':filetree -consider-gitignore<ret>' -docstring "View the current directory in vcs in tree format" 
+map global user V ':filetree<ret>' -docstring "View the current directory in tree format"
+
+map global user c ':comment-line<ret>' -docstring "Comment line on current selection"
