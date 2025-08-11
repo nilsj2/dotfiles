@@ -73,6 +73,12 @@ map global user S ':change-surround<ret>' -docstring "Change the nearest surroun
 
 map global user w '%|fmt -w 80<ret>' -docstring "format the documetn"
 
+hook global WinSetOption filetype=markdown %{
+    hook global ModeChange pop:insert:normal %{
+        execute-keys -draft '%|fmt -w 80<ret>'
+    }
+}
+
 map global user '/' /(?i) -docstring "case incensitive search"
 
 
