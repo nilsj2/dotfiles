@@ -31,7 +31,6 @@
     pkgs.yadm
     pkgs.lazygit
     pkgs.bat
-    pkgs.cloc
     pkgs.evremap
     pkgs.wl-clipboard
 	pkgs.kakoune-lsp
@@ -52,6 +51,13 @@
 	pkgs.bc
 	pkgs.marksman
 	pkgs.psst
+	pkgs.exercism
+	pkgs.tokei
+	pkgs.xxd
+	pkgs.gdb
+	pkgs.poop
+	pkgs.pwgen
+	pkgs.diceware
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
