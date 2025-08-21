@@ -57,6 +57,7 @@
 	pkgs.gdb
 	pkgs.poop
 	pkgs.pwgen
+	pkgs.trash-cli
 	pkgs.diceware
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
