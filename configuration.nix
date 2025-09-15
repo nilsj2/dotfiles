@@ -60,7 +60,6 @@
   # };
 
   # Enable the X11 windowing system.
-  # services.xserver.enable = true;
   services.xserver.enable = true;
 
   services.xserver.displayManager.gdm.enable = true;
@@ -78,12 +77,24 @@
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "se";
-    options = "caps:backspace,backspace:caps";
 
     extraLayouts.se-colemak-dhk = {
       description = "Swedish colemak dhk layout";
       languages = [ "se" ];
-      symbolsFile = /home/nilsj/.config/custom-keyboard-layout/symbols/se-colemak-dhk;
+      symbolsFile = .config/custom-keyboard-layout/symbols/se-colemak-dhk;
+    };
+  };
+
+  services.evremap = {
+    enable = true;
+    settings = {
+      device_name = "AT Translated Set 2 keyboard";
+      remap = [
+        {
+          input = [ "KEY_CAPSLOCK" ];
+          output = [ "KEY_BACKSPACE" ];
+        }
+      ];
     };
   };
 
@@ -133,7 +144,6 @@
       yadm
       lazygit
       bat
-      evremap
       ruff
       python3
       htop
@@ -146,6 +156,7 @@
       poop
       pwgen
       trash-cli
+      nixfmt-rfc-style
     ];
   };
 
