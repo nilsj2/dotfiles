@@ -2,15 +2,23 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    /etc/nixos/hardware-configuration.nix
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -19,7 +27,7 @@
   networking.hostName = "tkpad"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
   # Set your time zone.
   time.timeZone = "Europe/Stockholm";
@@ -32,17 +40,17 @@
   i18n.defaultLocale = "en_GB.UTF-8";
 
   i18n.extraLocaleSettings = {
-      LC_CTYPE = "sv_SE.UTF8";
-      LC_ADDRESS = "sv_SE.UTF-8";
-      LC_MEASUREMENT = "sv_SE.UTF-8";
-      LC_MESSAGES = "sv_SE.UTF-8";
-      LC_MONETARY = "sv_SE.UTF-8";
-      LC_NAME = "sv_SE.UTF-8";
-      LC_NUMERIC = "sv_SE.UTF-8";
-      LC_PAPER = "sv_SE.UTF-8";
-      LC_TELEPHONE = "sv_SE.UTF-8";
-      LC_TIME = "sv_SE.UTF-8";
-      LC_COLLATE = "sv_SE.UTF-8";
+    LC_CTYPE = "sv_SE.UTF8";
+    LC_ADDRESS = "sv_SE.UTF-8";
+    LC_MEASUREMENT = "sv_SE.UTF-8";
+    LC_MESSAGES = "sv_SE.UTF-8";
+    LC_MONETARY = "sv_SE.UTF-8";
+    LC_NAME = "sv_SE.UTF-8";
+    LC_NUMERIC = "sv_SE.UTF-8";
+    LC_PAPER = "sv_SE.UTF-8";
+    LC_TELEPHONE = "sv_SE.UTF-8";
+    LC_TIME = "sv_SE.UTF-8";
+    LC_COLLATE = "sv_SE.UTF-8";
   };
 
   # console = {
@@ -62,18 +70,21 @@
   services.gnome.core-developer-tools.enable = false;
   services.gnome.games.enable = false;
 
-  environment.gnome.excludePackages = with pkgs; [ gnome-tour gnome-user-docs ];
+  environment.gnome.excludePackages = with pkgs; [
+    gnome-tour
+    gnome-user-docs
+  ];
 
   # Configure keymap in X11
-  services.xserver.xkb= {
-      layout = "se";
-      options = "caps:backspace,backspace:caps";
+  services.xserver.xkb = {
+    layout = "se";
+    options = "caps:backspace,backspace:caps";
 
-      extraLayouts.se-colemak-dhk = {
-          description = "Swedish colemak dhk layout";
-          languages = [ "se" ];
-          symbolsFile = /home/nilsj/.config/custom-keyboard-layout/symbols/se-colemak-dhk;
-      };
+    extraLayouts.se-colemak-dhk = {
+      description = "Swedish colemak dhk layout";
+      languages = [ "se" ];
+      symbolsFile = /home/nilsj/.config/custom-keyboard-layout/symbols/se-colemak-dhk;
+    };
   };
 
   # services.xserver.xkb.options = "eurosign:e,caps:escape";
@@ -98,27 +109,50 @@
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
     shell = pkgs.fish;
     packages = with pkgs; [
-	tree
-	fastfetch
-	kakoune
-	kak-lsp
-	spotify-player
-	anki
-	git
-	fish
-	wl-clipboard
-        ghostty
-        vesktop
-        firefox
-        thunderbird-esr
-        gnome-pomodoro
+      tree
+      fastfetch
+      kakoune
+      kak-lsp
+      spotify-player
+      anki
+      git
+      gh
+      fish
+      wl-clipboard
+      ghostty
+      vesktop
+      firefox
+      thunderbird-esr
+      gnome-pomodoro
+      tldr
+      helix
+      yadm
+      trash-cli
+      ripgrep
+      fd
+      yadm
+      lazygit
+      bat
+      evremap
+      ruff
+      python3
+      htop
+      btop
+      uv
+      jq
+      exercism
+      tokei
+      gdb
+      poop
+      pwgen
+      trash-cli
     ];
   };
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
-   home-manager
+    #  home-manager
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -164,4 +198,3 @@
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "25.05"; # Did you read the comment?
 }
-
