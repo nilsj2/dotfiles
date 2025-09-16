@@ -2,9 +2,6 @@
 name = Nils Juto 
 email = nilsjuto@posteo.net
 
-[core]
-editor=kak
-
 [advice]
 defaultBranchName=false
 [credential "https://github.com"]
