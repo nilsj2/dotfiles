@@ -40,6 +40,8 @@
   i18n.defaultLocale = "en_GB.UTF-8";
 
   i18n.extraLocaleSettings = {
+    LANG = "en_GB.UTF-8";
+    LANGUAGE = "en_GB.UTF-8";
     LC_CTYPE = "sv_SE.UTF8";
     LC_ADDRESS = "sv_SE.UTF-8";
     LC_MEASUREMENT = "sv_SE.UTF-8";
