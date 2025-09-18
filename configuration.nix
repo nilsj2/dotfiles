@@ -130,7 +130,6 @@
       anki
       git
       gh
-      fish
       wl-clipboard
       ghostty
       vesktop
